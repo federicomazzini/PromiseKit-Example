@@ -21,19 +21,27 @@ class ViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 172
         
-//        firstly {
-//            Webservice.fetchCharacters()
-//            }.done { characters in
-//                self.characters = characters
-//                self.tableView.reloadData()
-//            }.catch { error in
-//                print(error)
-//        }
+        fetchCharacters()
         
-        retry()
+        tokenProcess()
     }
     
-    func retry() {
+    // MARK: - Fetching Data
+    
+    // Fetch Characters.
+    private func fetchCharacters() {
+        firstly {
+            Webservice.fetchCharacters()
+            }.done { characters in
+                self.characters = characters
+                self.tableView.reloadData()
+            }.catch { error in
+                print(error)
+        }
+    }
+    
+    // Fetch Characters with retrying.
+    private func retry() {
         Webservice.attempt(maximumRetryCount: 3) {
             Webservice.fetchCharacters()
             }.done { characters in
@@ -43,6 +51,23 @@ class ViewController: UITableViewController {
                 print(error)
         }
     }
+    
+    // Linking Wrapping promises.
+    private func tokenProcess() {
+        firstly {
+            Webservice.upload(image: UIImage())
+            }.then { (token) -> Promise<Token> in
+                Webservice.register(credentials: "aCredential")
+            }.then { (token) -> Promise<Token> in
+                Webservice.login(withToken: token)
+            }.done { token in
+                print(token)
+            }.catch { (error) in
+                print(error)
+        }
+    }
+    
+    // MARK: - UITableViewController
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.characters.count

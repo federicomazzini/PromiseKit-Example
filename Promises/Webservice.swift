@@ -14,7 +14,8 @@ class Webservice {
     
     static let charactersURLString: String = "http://www.mocky.io/v2/5bdca56b330000112581366a"
     
-    // Classic fetch.
+    // MARK: - Classic fetch.
+    
     static func fetchCharacters(completion: @escaping ([Character]?) -> ()) {
         Alamofire.request(charactersURLString).responseData(completionHandler: { response in
             
@@ -36,7 +37,8 @@ class Webservice {
         })
     }
     
-    // Fetch using promises.
+    // MARK: - Fetch using promises.
+    
     static func fetchCharacters() -> Promise<[Character]> {
         let q = DispatchQueue.global()
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
@@ -52,6 +54,8 @@ class Webservice {
         }
     }
     
+    // MARK: - Example of retying a promise.
+    
     static func attempt<T>(maximumRetryCount: Int = 3, delayBeforeRetry: DispatchTimeInterval = .seconds(2), _ body: @escaping () -> Promise<T>) -> Promise<T> {
         var attempts = 0
         func attempt() -> Promise<T> {
@@ -62,6 +66,40 @@ class Webservice {
             }
         }
         return attempt()
+    }
+    
+    // MARK: - Functions for conversion
+    
+    func upload(image: UIImage, completion:  @escaping (Token) -> Void){
+        completion("uploadtoken")
+    }
+    
+    func register(credentials: String, completion: @escaping (Token) -> Void){
+        completion("registertoken")
+    }
+    
+    func login(withToken token: Token, completion: @escaping (Token) -> Void) {
+        completion("logintoken")
+    }
+    
+    // MARK: - Converted Functions
+    
+    static func upload(image: UIImage) -> Promise<Token> {
+        return Promise<Token> { seal in
+            seal.fulfill(Token("registertoken"))
+        }
+    }
+    
+    static func register(credentials: String) -> Promise<Token> {
+        return Promise<Token> { seal in
+            seal.fulfill(Token("registertoken"))
+        }
+    }
+    
+    static func login(withToken token: Token) -> Promise<Token> {
+        return Promise<Token> { seal in
+            seal.fulfill(Token("registertoken"))
+        }
     }
     
 }
