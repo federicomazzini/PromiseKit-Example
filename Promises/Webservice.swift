@@ -19,8 +19,7 @@ class Webservice {
     static func fetchCharacters(completion: @escaping ([Character]?) -> ()) {
         Alamofire.request(charactersURLString).responseData(completionHandler: { response in
             
-            if let data = response.data
-            {
+            if let data = response.data {
                 do {
                     let decoder = JSONDecoder()
                     let characters: [Character] = try decoder.decode([Character].self, from: data)
