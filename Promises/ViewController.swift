@@ -21,9 +21,13 @@ class ViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 172
         
-        fetchCharacters()
+        readWriteProcess()
         
-        tokenProcess()
+//        fetchCharacters()
+        
+//        retry()
+        
+//        brokenPromise()
     }
     
     // MARK: - Fetching Data
@@ -52,16 +56,25 @@ class ViewController: UITableViewController {
         }
     }
     
-    // Linking Wrapping promises.
-    private func tokenProcess() {
+    // Linking Wrapped promises.
+    private func readWriteProcess() {
         firstly {
-            Webservice.upload(image: UIImage())
-            }.then { (token) -> Promise<Token> in
-                Webservice.register(credentials: "aCredential")
-            }.then { (token) -> Promise<Token> in
-                Webservice.login(withToken: token)
-            }.done { token in
-                print(token)
+            FileService.write(text: "hello", toFile: "hello.txt")
+            }.then {
+                FileService.read(file: "hello.txt")
+            }.done { fileContent in
+                print(fileContent)
+            }.catch { error in
+                print(error)
+        }
+    }
+    
+    // Broken promises example.
+    private func brokenPromise() {
+        firstly {
+            Webservice.BrokenPromise(method: "Webservice.fetchCharacters")
+            }.done {
+                self.tableView.reloadData()
             }.catch { (error) in
                 print(error)
         }

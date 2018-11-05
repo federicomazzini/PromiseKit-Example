@@ -63,37 +63,13 @@ class Webservice {
         return attempt()
     }
     
-    // MARK: - Functions for conversion
+    // MARK: - Broken Promise
     
-    func upload(image: UIImage, completion:  @escaping (Token) -> Void){
-        completion("uploadtoken")
-    }
-    
-    func register(credentials: String, completion: @escaping (Token) -> Void){
-        completion("registertoken")
-    }
-    
-    func login(withToken token: Token, completion: @escaping (Token) -> Void) {
-        completion("logintoken")
-    }
-    
-    // MARK: - Converted Functions
-    
-    static func upload(image: UIImage) -> Promise<Token> {
-        return Promise<Token> { seal in
-            seal.fulfill(Token("registertoken"))
-        }
-    }
-    
-    static func register(credentials: String) -> Promise<Token> {
-        return Promise<Token> { seal in
-            seal.fulfill(Token("registertoken"))
-        }
-    }
-    
-    static func login(withToken token: Token) -> Promise<Token> {
-        return Promise<Token> { seal in
-            seal.fulfill(Token("registertoken"))
+    // this helper function is used to indicate that there is still work to do.
+    static func BrokenPromise<T>(method: String = #function) -> Promise<T> {
+        return Promise<T>() { seal in
+            let err = NSError(domain: "PromiseKitTutorial", code: 0, userInfo: [NSLocalizedDescriptionKey: "'\(method)' has not been implemented yet."])
+            seal.reject(err)
         }
     }
     

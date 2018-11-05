@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06158C532190B75900E56E35 /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158C522190B75900E56E35 /* FileService.swift */; };
 		06161D53218CA0DC00277BC4 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06161D52218CA0DC00277BC4 /* Character.swift */; };
 		06161D55218CA63900277BC4 /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06161D54218CA63900277BC4 /* Webservice.swift */; };
 		0675B967218CD5EF00CCCFE1 /* CharacterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0675B966218CD5EF00CCCFE1 /* CharacterTableViewCell.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06158C522190B75900E56E35 /* FileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileService.swift; sourceTree = "<group>"; };
 		06161D52218CA0DC00277BC4 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		06161D54218CA63900277BC4 /* Webservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
 		0675B966218CD5EF00CCCFE1 /* CharacterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterTableViewCell.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				0675B966218CD5EF00CCCFE1 /* CharacterTableViewCell.swift */,
 				0675B968218CDA4B00CCCFE1 /* UIImageView+Utils.swift */,
 				067FB06A218CF046008435E4 /* Token.swift */,
+				06158C522190B75900E56E35 /* FileService.swift */,
 			);
 			path = Promises;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				06161D53218CA0DC00277BC4 /* Character.swift in Sources */,
 				0675B967218CD5EF00CCCFE1 /* CharacterTableViewCell.swift in Sources */,
 				067BFE3D218C8F4F008FCACE /* ViewController.swift in Sources */,
+				06158C532190B75900E56E35 /* FileService.swift in Sources */,
 				0675B969218CDA4B00CCCFE1 /* UIImageView+Utils.swift in Sources */,
 				067BFE3B218C8F4F008FCACE /* AppDelegate.swift in Sources */,
 			);
