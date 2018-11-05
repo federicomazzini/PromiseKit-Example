@@ -12,7 +12,7 @@ import PromiseKit
 
 class Webservice {
     
-    static let charactersURLString: String = "http://www.mocky.io/v2/5bdca56b330000112581366a"
+    static let charactersURLString: String = "http://www.mocky.io/v2/5be05ea83200002c0064960d"
     
     // MARK: - Classic fetch.
     
@@ -40,17 +40,12 @@ class Webservice {
     // MARK: - Fetch using promises.
     
     static func fetchCharacters() -> Promise<[Character]> {
-        let q = DispatchQueue.global()
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        
         return firstly {
             Alamofire.request(charactersURLString, method: .get).responseData()
-            }.map(on: q) { data, rsp in
+            }.map { data, rsp in
                 let decoder = JSONDecoder()
                 let characters: [Character] = try decoder.decode([Character].self, from: data)
                 return characters
-            }.ensure {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
     }
     
